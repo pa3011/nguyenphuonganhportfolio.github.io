@@ -4,107 +4,435 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nguyen Phuong Anh | Portfolio</title>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Quicksand', sans-serif;
       margin: 0;
       padding: 0;
-      background: #fff;
-      color: #333;
+      color: #444;
+      line-height: 1.6;
     }
-
-    header {
-      background: #fce4ec;
-      padding: 40px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      color: #d63384;
-      font-size: 2rem;
-    }
-
-    section {
-      padding: 40px;
+    
+    .container {
       max-width: 800px;
-      margin: auto;
+      margin: 0 auto;
+      padding: 20px;
     }
-
+    
+    .tab-content { 
+      display: none; 
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 20px 0;
+    }
+    
+    .tab-content.active { 
+      display: block; 
+      animation: popIn 0.5s ease-out;
+    }
+    
+    .tab-button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      background: #ffcce6;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .tab-button.active { 
+      background-color: #ff66b2 !important;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .tab-button:hover {
+      background: #ff99cc;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    h1, h2, h3 {
+      color: #d63384;
+    }
+    
     h2 {
-      color: #f06292;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
-
-    /* Kitty Banner */
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    ul {
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    .sticker {
+      width: 32px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    
+    .contact a {
+      color: #d63384;
+      text-decoration: none;
+    }
+    
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    .award-detail {
+      padding: 15px;
+      background: #fff9fb;
+      border-radius: 8px;
+      margin-top: 10px;
+      border-left: 4px solid #ff66b2;
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; display: none; }
+    }
+    
+    @keyframes heartFloat {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes floatKitty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+    @keyframes blinkGlow {
+      0% { box-shadow: 0 0 8px #ff99cc, 0 0 12px #ffb6c1; }
+      100% { box-shadow: 0 0 12px #ff66b2, 0 0 16px #ff1493; }
+    }
+    
+    .heart {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: heartFloat 4s linear forwards;
+    }
+    
     .kitty-banner {
       position: fixed;
-      bottom: 110px;
-      right: 20px;
-      background: #ffe6f0;
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 1rem;
-      color: #d63384;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 1000;
       font-weight: bold;
-      font-family: 'Quicksand', sans-serif;
-      box-shadow: 0 0 12px #ff66b2, 0 0 16px #ff1493;
-      animation: blinkGlow 1.5s infinite alternate;
-      transition: transform 0.3s ease-in-out;
-      z-index: 1001;
-      cursor: pointer;
+      color: #d63384;
+      display: flex;
+      align-items: center;
+    }
+    
+    .kitty-banner::before {
+      content: url('https://cdn-icons-png.flaticon.com/512/616/616408.png');
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    /* Welcome screen */
+    .welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffcce6 0%, #ffffff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    
+    .welcome-screen h1 {
+      color: #d63384;
+      font-size: 2.8rem;
+      margin: 0;
+      text-shadow: 1px 1px 2px #ffb6c1;
       text-align: center;
     }
-
-    .kitty-banner:hover {
-      transform: scale(1.05) rotate(-2deg);
+    
+    .welcome-screen p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #555;
     }
-
-    .kitty-banner::after {
-      content: 'Hi there! Let me guide you!';
-      display: block;
-      font-size: 0.85rem;
-      color: #ff66b2;
-      margin-top: 4px;
-      animation: kittyTalk 3s ease-in-out infinite;
-    }
-
-    @keyframes kittyTalk {
-      0%, 100% { opacity: 0; transform: translateY(4px); }
-      50% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes blinkGlow {
-      0% { box-shadow: 0 0 10px #ff66b2; }
-      100% { box-shadow: 0 0 25px #ff1493; }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .welcome-screen h1 {
+        font-size: 2rem;
+      }
+      
+      .tab-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Nguyen Phuong Anh</h1>
-    <p>Welcome to my portfolio!</p>
-  </header>
+  <!-- Welcome Screen -->
+  <div class="welcome-screen">
+    <h1>✨ Warmly Welcome to my Portfolio ✨</h1>
+    <p>Scroll down to explore my journey 💖</p>
+  </div>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I am passionate about leadership, science, and technology. I have participated in many competitions and social projects...</p>
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-button active" onclick="showTab('about')">About Me</button>
+      <button class="tab-button" onclick="showTab('awards')">Awards</button>
+      <button class="tab-button" onclick="showTab('leadership')">Leadership</button>
+      <button class="tab-button" onclick="showTab('strengths')">Strengths</button>
+      <button class="tab-button" onclick="showTab('contact')">Contact</button>
+    </div>
 
-    <h2>Awards</h2>
-    <ul>
-      <li>🏅 First Prize - Provincial Public Speaking</li>
-      <li>🏆 Second Prize - National Science and Technology</li>
-      <li>🎖️ Third Prize - Provincial English Olympiad</li>
-    </ul>
+    <!-- About Me Section -->
+    <div id="about" class="tab-content active">
+      <h2>💫 About Me</h2>
+      <p>I'm Nguyen Phuong Anh, a high school student from Son La. I dream of bringing global economic knowledge to contribute to the development of my hometown. I love learning, possess leadership skills, teamwork ability, and creative thinking. In addition, I'm known for being sociable, cheerful, and a good listener—traits that help me connect easily with people and contribute positively to team dynamics.</p>
+      
+      <p><em>(Tiếng Việt)</em><br>Tôi là Nguyễn Phương Anh, học sinh THPT đến từ Sơn La. Em mơ ước mang kiến thức kinh tế toàn cầu về góp phần phát triển quê hương. Em yêu thích học hỏi, có khả năng lãnh đạo, làm việc nhóm và tư duy sáng tạo. Bên cạnh đó, em là người hòa đồng, vui tính và biết lắng nghe – điều giúp em dễ dàng kết nối với mọi người và đóng góp tích cực trong môi trường tập thể.</p>
+      
+      <p>Field: Social and Behavioral Sciences<br>Through this portfolio, I wish to share my journey and big dream - that is to bring global economic knowledge to contribute to the development of Son La - a Northwest region of Vietnam with majestic natural beauty but still facing many economic difficulties. I believe that education is the bridge to change and I am ready to continue on that path.</p>
+    </div>
 
-    <h2>Projects</h2>
-    <p>Coming soon: Details on my Robotics, Imagine Cup, and Social Impact projects.</p>
+    <!-- Awards Section -->
+    <div id="awards" class="tab-content">
+      <img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png" alt="Awards Icon" style="width: 80px; margin: 1rem auto; display: block;">
+      <h2><img src="https://cdn-icons-png.flaticon.com/128/9131/9131529.png" class="sticker"/> Awards & Achievements</h2>
+      <h3>🏆 Thành tích nổi bật</h3>
+      <ul>
+        <li onclick="toggleAward('visef')" style="cursor: pointer; color: #d63384; font-weight: bold;">ViSEF - National Science & Engineering Fair</li>
+        <li>Giải Nhất - Cuộc thi Khoa học Kỹ thuật cấp Tỉnh</li>
+        <li>Giải Nhất - Cuộc thi Hùng Biện cấp Tỉnh</li>
+        <li>Giải Ba - Học sinh giỏi Tiếng Anh cấp Tỉnh</li>
+      </ul>
+      
+      <div id="visef" class="award-detail" style="display:none;">
+        <p style="font-style: italic; color: #444;">Field: Behavioral and Social Sciences</p>
+        <img src="https://via.placeholder.com/500x300?text=ViSEF+Project+Presentation" alt="ViSEF Project Presentation" style="width: 100%; max-width: 500px; border-radius: 12px;">
+        <p>Em đảm nhận vai trò nghiên cứu chính, viết báo cáo và thuyết trình tại cuộc thi. Dự án tập trung vào trí thông minh văn hóa của học sinh trung học tại Sơn La.</p>
+        <p>I contributed as the project's primary researcher, report writer, and presenter. Our project focused on cultural intelligence among high school students in Sơn La.</p>
+      </div>
+    </div>
 
-    <h2>Contact</h2>
-    <p>Email: nguyenphuonganh@email.com</p>
-  </section>
+    <!-- Leadership Section -->
+    <div id="leadership" class="tab-content">
+      <h2><img src="https://cdn-icons-png.flaticon.com/128/1041/1041916.png" class="sticker"/> Leadership & Projects</h2>
+      <h3>🌱 Vai trò lãnh đạo & Dự án</h3>
+      <ul>
+        <li>Chủ nhiệm CLB Greenfootmark</li>
+        <img src="https://via.placeholder.com/180x100?text=Green+Footmarks+Club" alt="Green Footmarks Club Logo" style="width: 180px; margin-top: 0.5rem; border-radius: 12px;">
+        <li>Trưởng tiểu ban Robotics</li>
+        <li>Đồng sáng lập dự án "Chung tay xây dựng ước mơ"</li>
+        <li>Đồng tổ chức workshop "Thực hành kỹ năng lãnh đạo" (Chương trình Youth Leader Incubator)</li>
+      </ul>
+    </div>
 
-  <div class="kitty-banner">Click Me!</div>
+    <!-- Strengths Section -->
+    <div id="strengths" class="tab-content">
+      <h2><img src="https://cdn-icons-png.flaticon.com/128/190/190411.png" class="sticker"/> Strengths</h2>
+      <h3>💪 Thế mạnh cá nhân</h3>
+      <ul>
+        <li onclick="toggleAward('leadershipDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">💡 Leadership & Teamwork</li>
+        <li onclick="toggleAward('swimmingDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🏊 Swimming Ability</li>
+        <li onclick="toggleAward('languageDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🗣️ Languages (IELTS 7.0, HSK4)</li>
+        <li onclick="toggleAward('toolsDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">💻 Tech Tools</li>
+        <li onclick="toggleAward('interestDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🎨 Interests</li>
+      </ul>
+      
+      <div id="leadershipDetail" class="award-detail" style="display:none;">
+        Em có kỹ năng lãnh đạo, làm việc nhóm và giao tiếp tốt. Em luôn chủ động hỗ trợ và hướng dẫn các thành viên trong nhóm hướng đến mục tiêu chung.
+      </div>
+      <div id="swimmingDetail" class="award-detail" style="display:none;">
+        Em bơi tốt. Bơi lội giúp em rèn luyện sự kiên trì và tinh thần kỷ luật - cả thể chất lẫn tinh thần.
+      </div>
+      <div id="languageDetail" class="award-detail" style="display:none;">
+        Ngôn ngữ: Tiếng Anh (IELTS 7.0), Tiếng Trung (HSK4)
+      </div>
+      <div id="toolsDetail" class="award-detail" style="display:none;">
+        Công cụ thành thạo: Canva, Microsoft Office
+      </div>
+      <div id="interestDetail" class="award-detail" style="display:none;">
+        Sở thích: Kinh tế học, Tranh biện, Viết lách, Đọc tiểu thuyết, Tự làm đồ thủ công, Bảo vệ môi trường
+      </div>
+      
+      <img src="https://cdn-icons-png.flaticon.com/512/3048/3048406.png" alt="Strength Icon" style="width: 140px; margin-top: 1rem; display: block; margin-left: auto; margin-right: auto;">
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="tab-content">
+      <h2><img src="https://cdn-icons-png.flaticon.com/128/3059/3059444.png" class="sticker"/> Contact</h2>
+      <div class="contact">
+        📧 Email: <a href="mailto:nguyenphuonganh30112008@gmail.com">nguyenphuonganh30112008@gmail.com</a><br>
+        📷 Instagram: <a href="https://instagram.com/_peoba_" target="_blank">@_peoba_</a><br>
+        📍 Location: Vietnam
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      &copy; 2025 Nguyen Phuong Anh. Designed with love and pink vibes 💖✨
+    </div>
+  </div>
+
+  <!-- Hello Kitty Floating Icon -->
+  <img src="https://png.pngtree.com/png-clipart/20230914/original/pngtree-hello-kitty-cartoon-kawaii-character-png-image_12228076.png" alt="Hello Kitty" style="position: fixed; bottom: 20px; right: 20px; width: 80px; z-index: 1000; animation: floatKitty 5s ease-in-out infinite;">
+
+  <!-- Kitty Banner (will be shown when scrolling) -->
+  <div class="kitty-banner" style="display: none;">✨ Welcome to my Portfolio ✨</div>
+
+  <script>
+    // Welcome screen animation
+    const welcomeScreen = document.querySelector('.welcome-screen');
+    const createHeart = () => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      welcomeScreen.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    };
+    
+    const heartInterval = setInterval(createHeart, 400);
+    
+    // Fade out after 5s
+    setTimeout(() => {
+      welcomeScreen.style.animation = 'fadeOut 1s forwards';
+      clearInterval(heartInterval);
+      setTimeout(() => welcomeScreen.style.display = 'none', 1000);
+    }, 5000);
+    
+    // Tab functionality
+    function showTab(id) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+      
+      // Scroll to the top of the tab content
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    // Toggle award details
+    function toggleAward(id) {
+      const section = document.getElementById(id);
+      const allAwardDetails = document.querySelectorAll('.award-detail');
+      
+      allAwardDetails.forEach(item => {
+        if (item.id !== id) {
+          item.style.opacity = 0;
+          setTimeout(() => item.style.display = 'none', 300);
+        }
+      });
+      
+      if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        section.style.opacity = 0;
+        section.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => { section.style.opacity = 1; }, 10);
+      } else {
+        section.style.opacity = 0;
+        section.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => { section.style.display = 'none'; }, 500);
+      }
+      
+      // Highlight the clicked item
+      event.target.style.backgroundColor = '#ffe6f0';
+      setTimeout(() => event.target.style.backgroundColor = '', 600);
+    }
+    
+    // Section observer for the kitty banner
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const kittyBanner = document.querySelector('.kitty-banner');
+        
+        if (entry.isIntersecting) {
+          kittyBanner.style.display = 'flex';
+          
+          if (entry.target.id === 'awards') {
+            kittyBanner.innerHTML = '🏆 Welcome to Awards Section!';
+          } else if (entry.target.id === 'strengths') {
+            kittyBanner.innerHTML = '💪 Welcome to Strengths Section!';
+          } else if (entry.target.id === 'leadership') {
+            kittyBanner.innerHTML = '🌱 Welcome to Leadership Section!';
+          } else if (entry.target.id === 'contact') {
+            kittyBanner.innerHTML = '📬 Feel free to Contact me!';
+          } else if (entry.target.id === 'about') {
+            kittyBanner.innerHTML = '💫 About Me';
+          }
+          
+          setTimeout(() => {
+            kittyBanner.style.opacity = 1;
+          }, 10);
+        } else {
+          kittyBanner.style.opacity = 0;
+          setTimeout(() => {
+            if (!entry.isIntersecting) kittyBanner.style.display = 'none';
+          }, 300);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    // Observe all sections
+    document.querySelectorAll('.tab-content').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
