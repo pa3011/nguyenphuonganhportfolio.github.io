@@ -4,10 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nguyen Phuong Anh | Portfolio</title>
-  <!-- Styles and Kitty Banner CSS go here -->
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+
+    header {
+      background: #fce4ec;
+      padding: 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #d63384;
+      font-size: 2rem;
+    }
+
+    section {
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #f06292;
+    }
+
+    /* Kitty Banner */
+    .kitty-banner {
+      position: fixed;
+      bottom: 110px;
+      right: 20px;
+      background: #ffe6f0;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 1rem;
+      color: #d63384;
+      font-weight: bold;
+      font-family: 'Quicksand', sans-serif;
+      box-shadow: 0 0 12px #ff66b2, 0 0 16px #ff1493;
+      animation: blinkGlow 1.5s infinite alternate;
+      transition: transform 0.3s ease-in-out;
+      z-index: 1001;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .kitty-banner:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .kitty-banner::after {
+      content: 'Hi there! Let me guide you!';
+      display: block;
+      font-size: 0.85rem;
+      color: #ff66b2;
+      margin-top: 4px;
+      animation: kittyTalk 3s ease-in-out infinite;
+    }
+
+    @keyframes kittyTalk {
+      0%, 100% { opacity: 0; transform: translateY(4px); }
+      50% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blinkGlow {
+      0% { box-shadow: 0 0 10px #ff66b2; }
+      100% { box-shadow: 0 0 25px #ff1493; }
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Body content with sections: Welcome, About, Awards, Leadership, Strengths, Contact -->
-  <!-- Hello Kitty Image and script added -->
+  <header>
+    <h1>Nguyen Phuong Anh</h1>
+    <p>Welcome to my portfolio!</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>I am passionate about leadership, science, and technology. I have participated in many competitions and social projects...</p>
+
+    <h2>Awards</h2>
+    <ul>
+      <li>🏅 First Prize - Provincial Public Speaking</li>
+      <li>🏆 Second Prize - National Science and Technology</li>
+      <li>🎖️ Third Prize - Provincial English Olympiad</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <p>Coming soon: Details on my Robotics, Imagine Cup, and Social Impact projects.</p>
+
+    <h2>Contact</h2>
+    <p>Email: nguyenphuonganh@email.com</p>
+  </section>
+
+  <div class="kitty-banner">Click Me!</div>
 </body>
 </html>
