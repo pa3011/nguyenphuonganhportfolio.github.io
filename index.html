@@ -1,438 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyen Phuong Anh | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phuong Anh's Portfolio</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --pink-dark: #d63384;
+      --pink-light: #ff66b2;
+      --pink-bg: #fff0f5;
+      --pink-card: #ffe6f2;
+    }
+    
     body {
       font-family: 'Quicksand', sans-serif;
+      background-color: var(--pink-bg);
+      color: #333;
       margin: 0;
       padding: 0;
-      color: #444;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
     
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .tab-content { 
-      display: none; 
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin: 20px 0;
-    }
-    
-    .tab-content.active { 
-      display: block; 
-      animation: popIn 0.5s ease-out;
-    }
-    
-    .tab-button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      background: #ffcce6;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: 'Quicksand', sans-serif;
-    }
-    
-    .tab-button.active { 
-      background-color: #ff66b2 !important;
+    /* Header with Hello Kitty */
+    header {
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink-light));
       color: white;
-      font-weight: bold;
+      text-align: center;
+      padding: 2rem 0 3rem;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     }
     
-    .tab-button:hover {
-      background: #ff99cc;
+    .kitty-header {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 80px;
+      animation: float 3s ease-in-out infinite;
     }
     
+    h1 {
+      font-family: 'Love Ya Like A Sister', cursive;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    /* Navigation */
     .nav-tabs {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      margin: 20px 0;
+      gap: 10px;
+      padding: 1.5rem;
+      background: white;
+      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.1);
     }
     
-    h1, h2, h3 {
-      color: #d63384;
+    .tab-button {
+      padding: 12px 24px;
+      border: none;
+      background: var(--pink-card);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 700;
+      color: var(--pink-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tab-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+    }
+    
+    .tab-button.active {
+      background: var(--pink-dark);
+      color: white;
+    }
+    
+    .tab-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40px;
+      height: 200%;
+      background: rgba(255,255,255,0.2);
+      transform: rotate(30deg);
+      transition: all 0.3s;
+    }
+    
+    .tab-button:hover::after {
+      left: 120%;
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.8s ease-out;
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(214, 51, 132, 0.1);
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tab-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--pink-dark), var(--pink-light));
+    }
+    
+    .tab-content.active {
+      display: block;
     }
     
     h2 {
+      color: var(--pink-dark);
+      font-family: 'Love Ya Like A Sister', cursive;
       font-size: 2rem;
-      text-align: center;
       margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
     }
     
-    h3 {
-      font-size: 1.5rem;
-      margin-top: 1.5rem;
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: var(--pink-light);
     }
     
-    ul {
-      padding-left: 20px;
+    /* About Me Section */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
     
-    li {
-      margin-bottom: 10px;
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--pink-light);
+      box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
     }
     
-    .sticker {
-      width: 32px;
-      vertical-align: middle;
+    .about-text {
+      flex: 1;
+    }
+    
+    .info-item {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-item i {
+      color: var(--pink-dark);
+      width: 25px;
+      text-align: center;
       margin-right: 10px;
     }
     
-    .contact a {
-      color: #d63384;
-      text-decoration: none;
+    /* Strength Section */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
     }
     
-    .contact a:hover {
-      text-decoration: underline;
-    }
-    
-    .footer {
+    .strength-card {
+      background: var(--pink-card);
+      padding: 1.5rem;
+      border-radius: 15px;
       text-align: center;
-      padding: 20px;
-      color: #888;
-      font-size: 0.9rem;
+      transition: all 0.3s;
     }
     
-    .award-detail {
-      padding: 15px;
-      background: #fff9fb;
-      border-radius: 8px;
-      margin-top: 10px;
-      border-left: 4px solid #ff66b2;
+    .strength-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(214, 51, 132, 0.2);
     }
     
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; display: none; }
+    .strength-icon {
+      font-size: 2.5rem;
+      color: var(--pink-dark);
+      margin-bottom: 1rem;
     }
     
-    @keyframes heartFloat {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100vh); opacity: 0; }
+    /* Awards Section */
+    .awards-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
     }
     
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
+    .award-category {
+      background: var(--pink-card);
+      padding: 1.5rem;
+      border-radius: 15px;
     }
     
-    @keyframes floatKitty {
+    .award-item {
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .award-item::before {
+      content: '🎀';
+      position: absolute;
+      left: 0;
+    }
+    
+    /* Contact Section */
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    
+    .contact-card {
+      flex: 1;
+      min-width: 200px;
+      background: var(--pink-card);
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .contact-card:hover {
+      transform: scale(1.05);
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      color: var(--pink-dark);
+      margin-bottom: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink-light));
+      color: white;
+      margin-top: 3rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
     
-    @keyframes blinkGlow {
-      0% { box-shadow: 0 0 8px #ff99cc, 0 0 12px #ffb6c1; }
-      100% { box-shadow: 0 0 12px #ff66b2, 0 0 16px #ff1493; }
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
     
-    .heart {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      animation: heartFloat 4s linear forwards;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .profile-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .awards-container {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
     }
     
-    .kitty-banner {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 10px 20px;
-      border-radius: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      z-index: 1000;
-      font-weight: bold;
-      color: #d63384;
-      display: flex;
-      align-items: center;
-    }
-    
-    .kitty-banner::before {
-      content: url('https://cdn-icons-png.flaticon.com/512/616/616408.png');
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-    
-    /* Welcome screen */
-    .welcome-screen {
+    /* Floating elements */
+    .floating-hearts {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffcce6 0%, #ffffff 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
     }
     
-    .welcome-screen h1 {
-      color: #d63384;
-      font-size: 2.8rem;
-      margin: 0;
-      text-shadow: 1px 1px 2px #ffb6c1;
-      text-align: center;
-    }
-    
-    .welcome-screen p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      color: #555;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .welcome-screen h1 {
-        font-size: 2rem;
-      }
-      
-      .tab-button {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-      }
-      
-      h2 {
-        font-size: 1.5rem;
-      }
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      color: rgba(214, 51, 132, 0.3);
+      animation: float 5s linear infinite;
     }
   </style>
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div class="welcome-screen">
-    <h1>✨ Warmly Welcome to my Portfolio ✨</h1>
-    <p>Scroll down to explore my journey 💖</p>
+  <!-- Floating Hearts Background -->
+  <div class="floating-hearts" id="hearts-container"></div>
+  
+  <!-- Header with Hello Kitty -->
+  <header>
+    <img src="https://i.imgur.com/WSJvJ9P.png" alt="Hello Kitty" class="kitty-header">
+    <h1>Phuong Anh Nguyen</h1>
+    <p>High School Student | Future Economist</p>
+  </header>
+  
+  <!-- Navigation -->
+  <div class="nav-tabs">
+    <button class="tab-button active" onclick="showTab('about')">About Me</button>
+    <button class="tab-button" onclick="showTab('strength')">My Strength</button>
+    <button class="tab-button" onclick="showTab('awards')">My Awards</button>
+    <button class="tab-button" onclick="showTab('contact')">Contact Me</button>
   </div>
-
+  
   <!-- Main Content -->
   <div class="container">
-    <!-- Navigation Tabs -->
-    <div class="nav-tabs">
-      <button class="tab-button active" onclick="showTab('about')">About Me</button>
-      <button class="tab-button" onclick="showTab('awards')">Awards</button>
-      <button class="tab-button" onclick="showTab('leadership')">Leadership</button>
-      <button class="tab-button" onclick="showTab('strengths')">Strengths</button>
-      <button class="tab-button" onclick="showTab('contact')">Contact</button>
-    </div>
-
     <!-- About Me Section -->
     <div id="about" class="tab-content active">
-      <h2>💫 About Me</h2>
-      <p>I'm Nguyen Phuong Anh, a high school student from Son La. I dream of bringing global economic knowledge to contribute to the development of my hometown. I love learning, possess leadership skills, teamwork ability, and creative thinking. In addition, I'm known for being sociable, cheerful, and a good listener—traits that help me connect easily with people and contribute positively to team dynamics.</p>
+      <h2>🌸 About Me</h2>
       
-      <p><em>(Tiếng Việt)</em><br>Tôi là Nguyễn Phương Anh, học sinh THPT đến từ Sơn La. Em mơ ước mang kiến thức kinh tế toàn cầu về góp phần phát triển quê hương. Em yêu thích học hỏi, có khả năng lãnh đạo, làm việc nhóm và tư duy sáng tạo. Bên cạnh đó, em là người hòa đồng, vui tính và biết lắng nghe – điều giúp em dễ dàng kết nối với mọi người và đóng góp tích cực trong môi trường tập thể.</p>
+      <div class="profile-card">
+        <img src="https://i.imgur.com/JqYeYnT.jpg" alt="Phuong Anh" class="profile-pic">
+        <div class="about-text">
+          <div class="info-item">
+            <i class="fas fa-user"></i>
+            <span><strong>Name:</strong> Nguyen Phuong Anh</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-birthday-cake"></i>
+            <span><strong>Birthday:</strong> November 30, 2008</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span><strong>From:</strong> Son La, Vietnam</span>
+          </div>
+        </div>
+      </div>
       
-      <p>Field: Social and Behavioral Sciences<br>Through this portfolio, I wish to share my journey and big dream - that is to bring global economic knowledge to contribute to the development of Son La - a Northwest region of Vietnam with majestic natural beauty but still facing many economic difficulties. I believe that education is the bridge to change and I am ready to continue on that path.</p>
+      <p>Hello! I'm a passionate high school student from the beautiful mountainous province of Son La - known for its breathtaking terraced rice fields, unique ethnic cultures, and the famous Son La Hydropower Plant. Growing up here has taught me resilience and the value of community.</p>
+      
+      <p>I dream of bringing global economic knowledge to contribute to my hometown's development. With my leadership skills and creative thinking, I'm working hard to make this dream come true!</p>
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <img src="https://i.imgur.com/XwZQH9J.jpg" alt="Son La landscape" style="width: 100%; max-width: 500px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <p style="font-style: italic; color: var(--pink-dark); margin-top: 0.5rem;">Beautiful terraced fields in Son La</p>
+      </div>
     </div>
-
+    
+    <!-- Strength Section -->
+    <div id="strength" class="tab-content">
+      <h2>💪 My Strength</h2>
+      
+      <div class="strengths-grid">
+        <div class="strength-card">
+          <div class="strength-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Communication Skills</h3>
+          <p>Excellent at public speaking and teamwork, with experience in debate and hosting workshops</p>
+        </div>
+        
+        <div class="strength-card">
+          <div class="strength-icon">
+            <i class="fas fa-flag"></i>
+          </div>
+          <h3>Leadership</h3>
+          <p>Founded clubs, led teams in competitions, and mentored younger students</p>
+        </div>
+        
+        <div class="strength-card">
+          <div class="strength-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Tech Tools</h3>
+          <p>Microsoft Office, Canva, CapCut, basic programming</p>
+        </div>
+        
+        <div class="strength-card">
+          <div class="strength-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Hobbies</h3>
+          <p>Reading books, swimming, watching films, DIY crafts</p>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <img src="https://i.imgur.com/7QZxJ9D.png" alt="Skills illustration" style="width: 100%; max-width: 400px;">
+      </div>
+    </div>
+    
     <!-- Awards Section -->
     <div id="awards" class="tab-content">
-      <img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png" alt="Awards Icon" style="width: 80px; margin: 1rem auto; display: block;">
-      <h2><img src="https://cdn-icons-png.flaticon.com/128/9131/9131529.png" class="sticker"/> Awards & Achievements</h2>
-      <h3>🏆 Thành tích nổi bật</h3>
-      <ul>
-        <li onclick="toggleAward('visef')" style="cursor: pointer; color: #d63384; font-weight: bold;">ViSEF - National Science & Engineering Fair</li>
-        <li>Giải Nhất - Cuộc thi Khoa học Kỹ thuật cấp Tỉnh</li>
-        <li>Giải Nhất - Cuộc thi Hùng Biện cấp Tỉnh</li>
-        <li>Giải Ba - Học sinh giỏi Tiếng Anh cấp Tỉnh</li>
-      </ul>
+      <h2>🏆 My Awards</h2>
       
-      <div id="visef" class="award-detail" style="display:none;">
-        <p style="font-style: italic; color: #444;">Field: Behavioral and Social Sciences</p>
-        <img src="https://via.placeholder.com/500x300?text=ViSEF+Project+Presentation" alt="ViSEF Project Presentation" style="width: 100%; max-width: 500px; border-radius: 12px;">
-        <p>Em đảm nhận vai trò nghiên cứu chính, viết báo cáo và thuyết trình tại cuộc thi. Dự án tập trung vào trí thông minh văn hóa của học sinh trung học tại Sơn La.</p>
-        <p>I contributed as the project's primary researcher, report writer, and presenter. Our project focused on cultural intelligence among high school students in Sơn La.</p>
+      <div class="awards-container">
+        <div class="award-category">
+          <h3 style="color: var(--pink-dark); text-align: center;">Education</h3>
+          
+          <div class="award-item">
+            <strong>GPA:</strong> 9.1 (Grade 10), 9.2 (Grade 11), aiming for 9.1 (Grade 12)
+          </div>
+          
+          <div class="award-item">
+            <strong>Third Prize</strong> - Provincial Excellent Student Competition in English
+          </div>
+          
+          <div class="award-item">
+            <strong>IELTS 7.0</strong> (Planning to retake soon)
+          </div>
+          
+          <div class="award-item">
+            <strong>First Prize</strong> - Provincial English Oratory Contest
+          </div>
+          
+          <div class="award-item">
+            <strong>Member</strong> of SCL Team in Steam For Vietnam Robotics Competition 2023
+          </div>
+          
+          <div class="award-item">
+            <strong>Participant</strong> in Microsoft Imagination Cup Junior
+          </div>
+          
+          <div class="award-item">
+            <strong>First Prize</strong> - Provincial Science and Technology Competition
+          </div>
+          
+          <div class="award-item">
+            <strong>Second Prize</strong> - National Science and Technology Competition
+          </div>
+        </div>
+        
+        <div class="award-category">
+          <h3 style="color: var(--pink-dark); text-align: center;">Activities & Leadership</h3>
+          
+          <div class="award-item">
+            <strong>Member</strong> of Book and Action Club
+          </div>
+          
+          <div class="award-item">
+            <strong>Founder & President</strong> of Greenfootmark Club
+          </div>
+          
+          <div class="award-item">
+            <strong>Head</strong> of Robotics Subcommittee
+          </div>
+          
+          <div class="award-item">
+            <strong>Co-founder</strong> of "Joining Hands to Build Dreams" Project
+          </div>
+          
+          <div class="award-item">
+            <strong>Co-host</strong> of "Leadership Skills Practice" Workshop (Youth Leader Incubator Programme)
+          </div>
+          
+          <div class="award-item">
+            <strong>President</strong> of CSL Information Technology Club
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <img src="https://i.imgur.com/5tGJZ1B.png" alt="Awards illustration" style="width: 100%; max-width: 400px;">
       </div>
     </div>
-
-    <!-- Leadership Section -->
-    <div id="leadership" class="tab-content">
-      <h2><img src="https://cdn-icons-png.flaticon.com/128/1041/1041916.png" class="sticker"/> Leadership & Projects</h2>
-      <h3>🌱 Vai trò lãnh đạo & Dự án</h3>
-      <ul>
-        <li>Chủ nhiệm CLB Greenfootmark</li>
-        <img src="https://via.placeholder.com/180x100?text=Green+Footmarks+Club" alt="Green Footmarks Club Logo" style="width: 180px; margin-top: 0.5rem; border-radius: 12px;">
-        <li>Trưởng tiểu ban Robotics</li>
-        <li>Đồng sáng lập dự án "Chung tay xây dựng ước mơ"</li>
-        <li>Đồng tổ chức workshop "Thực hành kỹ năng lãnh đạo" (Chương trình Youth Leader Incubator)</li>
-      </ul>
-    </div>
-
-    <!-- Strengths Section -->
-    <div id="strengths" class="tab-content">
-      <h2><img src="https://cdn-icons-png.flaticon.com/128/190/190411.png" class="sticker"/> Strengths</h2>
-      <h3>💪 Thế mạnh cá nhân</h3>
-      <ul>
-        <li onclick="toggleAward('leadershipDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">💡 Leadership & Teamwork</li>
-        <li onclick="toggleAward('swimmingDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🏊 Swimming Ability</li>
-        <li onclick="toggleAward('languageDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🗣️ Languages (IELTS 7.0, HSK4)</li>
-        <li onclick="toggleAward('toolsDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">💻 Tech Tools</li>
-        <li onclick="toggleAward('interestDetail')" style="cursor:pointer; color:#d63384; font-weight:bold;">🎨 Interests</li>
-      </ul>
-      
-      <div id="leadershipDetail" class="award-detail" style="display:none;">
-        Em có kỹ năng lãnh đạo, làm việc nhóm và giao tiếp tốt. Em luôn chủ động hỗ trợ và hướng dẫn các thành viên trong nhóm hướng đến mục tiêu chung.
-      </div>
-      <div id="swimmingDetail" class="award-detail" style="display:none;">
-        Em bơi tốt. Bơi lội giúp em rèn luyện sự kiên trì và tinh thần kỷ luật - cả thể chất lẫn tinh thần.
-      </div>
-      <div id="languageDetail" class="award-detail" style="display:none;">
-        Ngôn ngữ: Tiếng Anh (IELTS 7.0), Tiếng Trung (HSK4)
-      </div>
-      <div id="toolsDetail" class="award-detail" style="display:none;">
-        Công cụ thành thạo: Canva, Microsoft Office
-      </div>
-      <div id="interestDetail" class="award-detail" style="display:none;">
-        Sở thích: Kinh tế học, Tranh biện, Viết lách, Đọc tiểu thuyết, Tự làm đồ thủ công, Bảo vệ môi trường
-      </div>
-      
-      <img src="https://cdn-icons-png.flaticon.com/512/3048/3048406.png" alt="Strength Icon" style="width: 140px; margin-top: 1rem; display: block; margin-left: auto; margin-right: auto;">
-    </div>
-
+    
     <!-- Contact Section -->
     <div id="contact" class="tab-content">
-      <h2><img src="https://cdn-icons-png.flaticon.com/128/3059/3059444.png" class="sticker"/> Contact</h2>
-      <div class="contact">
-        📧 Email: <a href="mailto:nguyenphuonganh30112008@gmail.com">nguyenphuonganh30112008@gmail.com</a><br>
-        📷 Instagram: <a href="https://instagram.com/_peoba_" target="_blank">@_peoba_</a><br>
-        📍 Location: Vietnam
+      <h2>📩 Contact Me</h2>
+      
+      <p>Feel free to reach out for collaborations or just to say hello!</p>
+      
+      <div class="contact-methods">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3>Email</h3>
+          <p>nguyenphuonganh30112008@gmail.com</p>
+          <a href="mailto:nguyenphuonganh30112008@gmail.com" style="color: var(--pink-dark); text-decoration: none;">Send Email</a>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <h3>Instagram</h3>
+          <p>@_peoba_</p>
+          <a href="https://instagram.com/_peoba_" target="_blank" style="color: var(--pink-dark); text-decoration: none;">Follow Me</a>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <img src="https://i.imgur.com/9pJYQ0G.png" alt="Contact illustration" style="width: 100%; max-width: 300px;">
+        <p style="margin-top: 1rem; font-style: italic; color: var(--pink-dark);">Let's connect and create something amazing together!</p>
       </div>
     </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      &copy; 2025 Nguyen Phuong Anh. Designed with love and pink vibes 💖✨
-    </div>
   </div>
-
-  <!-- Hello Kitty Floating Icon -->
-  <img src="https://png.pngtree.com/png-clipart/20230914/original/pngtree-hello-kitty-cartoon-kawaii-character-png-image_12228076.png" alt="Hello Kitty" style="position: fixed; bottom: 20px; right: 20px; width: 80px; z-index: 1000; animation: floatKitty 5s ease-in-out infinite;">
-
-  <!-- Kitty Banner (will be shown when scrolling) -->
-  <div class="kitty-banner" style="display: none;">✨ Welcome to my Portfolio ✨</div>
-
+  
+  <!-- Footer -->
+  <footer>
+    <p>© 2023 Phuong Anh Nguyen. All rights reserved.</p>
+    <p>Made with <i class="fas fa-heart" style="color: #ffebee;"></i> and lots of pink!</p>
+  </footer>
+  
+  <!-- Floating Hello Kitty -->
+  <img src="https://i.imgur.com/Wn0QZQw.png" alt="Floating Hello Kitty" id="floating-kitty" style="position: fixed; bottom: 20px; right: 20px; width: 80px; z-index: 100; animation: float 4s ease-in-out infinite;">
+  
   <script>
-    // Welcome screen animation
-    const welcomeScreen = document.querySelector('.welcome-screen');
-    const createHeart = () => {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      welcomeScreen.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    };
-    
-    const heartInterval = setInterval(createHeart, 400);
-    
-    // Fade out after 5s
-    setTimeout(() => {
-      welcomeScreen.style.animation = 'fadeOut 1s forwards';
-      clearInterval(heartInterval);
-      setTimeout(() => welcomeScreen.style.display = 'none', 1000);
-    }, 5000);
-    
-    // Tab functionality
+    // Tab switching
     function showTab(id) {
-      const tabs = document.querySelectorAll('.tab-content');
-      const buttons = document.querySelectorAll('.tab-button');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      buttons.forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
       document.getElementById(id).classList.add('active');
       event.target.classList.add('active');
-      
-      // Scroll to the top of the tab content
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     
-    // Toggle award details
-    function toggleAward(id) {
-      const section = document.getElementById(id);
-      const allAwardDetails = document.querySelectorAll('.award-detail');
+    // Create floating hearts
+    function createHearts() {
+      const container = document.getElementById('hearts-container');
+      const colors = ['#ff66b2', '#ff99cc', '#ffb6c1', '#ffcce6'];
       
-      allAwardDetails.forEach(item => {
-        if (item.id !== id) {
-          item.style.opacity = 0;
-          setTimeout(() => item.style.display = 'none', 300);
-        }
-      });
-      
-      if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        section.style.opacity = 0;
-        section.style.transition = 'opacity 0.5s ease-in-out';
-        setTimeout(() => { section.style.opacity = 1; }, 10);
-      } else {
-        section.style.opacity = 0;
-        section.style.transition = 'opacity 0.5s ease-in-out';
-        setTimeout(() => { section.style.display = 'none'; }, 500);
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        heart.style.animationDelay = (Math.random() * 5) + 's';
+        heart.style.opacity = Math.random() * 0.5 + 0.1;
+        container.appendChild(heart);
       }
-      
-      // Highlight the clicked item
-      event.target.style.backgroundColor = '#ffe6f0';
-      setTimeout(() => event.target.style.backgroundColor = '', 600);
     }
     
-    // Section observer for the kitty banner
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const kittyBanner = document.querySelector('.kitty-banner');
-        
-        if (entry.isIntersecting) {
-          kittyBanner.style.display = 'flex';
-          
-          if (entry.target.id === 'awards') {
-            kittyBanner.innerHTML = '🏆 Welcome to Awards Section!';
-          } else if (entry.target.id === 'strengths') {
-            kittyBanner.innerHTML = '💪 Welcome to Strengths Section!';
-          } else if (entry.target.id === 'leadership') {
-            kittyBanner.innerHTML = '🌱 Welcome to Leadership Section!';
-          } else if (entry.target.id === 'contact') {
-            kittyBanner.innerHTML = '📬 Feel free to Contact me!';
-          } else if (entry.target.id === 'about') {
-            kittyBanner.innerHTML = '💫 About Me';
-          }
-          
-          setTimeout(() => {
-            kittyBanner.style.opacity = 1;
-          }, 10);
-        } else {
-          kittyBanner.style.opacity = 0;
-          setTimeout(() => {
-            if (!entry.isIntersecting) kittyBanner.style.display = 'none';
-          }, 300);
-        }
-      });
-    }, { threshold: 0.5 });
-    
-    // Observe all sections
-    document.querySelectorAll('.tab-content').forEach(section => {
-      observer.observe(section);
+    // Make Hello Kitty interactive
+    const kitty = document.getElementById('floating-kitty');
+    kitty.addEventListener('click', function() {
+      this.style.animation = 'heartBeat 0.8s';
+      setTimeout(() => {
+        this.style.animation = 'float 4s ease-in-out infinite';
+      }, 800);
     });
+    
+    // Initialize
+    window.onload = function() {
+      createHearts();
+    };
   </script>
 </body>
 </html>
